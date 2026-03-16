@@ -7,10 +7,18 @@ export interface Trend {
   popularity: number; // 1-100
   year: number;
   figmaPromptHints: string[];
+  source?: "builtin" | "ai-generated" | "user"; // origin of the trend
+  addedAt?: string; // ISO date string
 }
 
-export const TRENDS: Trend[] = [
-  // === Styles ===
+// ============================================
+// Built-in Trend Database
+// ============================================
+
+export const BUILTIN_TRENDS: Trend[] = [
+  // ===========================
+  // STYLES (15)
+  // ===========================
   {
     id: "bento-ui",
     name: "Bento UI",
@@ -25,6 +33,7 @@ export const TRENDS: Trend[] = [
       "Add subtle rounded corners (16px) and soft shadows",
       "Use consistent padding (24px) between grid items",
     ],
+    source: "builtin",
   },
   {
     id: "glassmorphism",
@@ -40,6 +49,7 @@ export const TRENDS: Trend[] = [
       "Add 1px border with rgba(255,255,255,0.2)",
       "Layer elements over colorful or gradient backgrounds",
     ],
+    source: "builtin",
   },
   {
     id: "neubrutalism",
@@ -55,6 +65,7 @@ export const TRENDS: Trend[] = [
       "Choose high-contrast, saturated color palette",
       "Use monospace or display fonts for headings",
     ],
+    source: "builtin",
   },
   {
     id: "organic-shapes",
@@ -70,6 +81,7 @@ export const TRENDS: Trend[] = [
       "Rounded corners on all containers (20px+)",
       "Gradient fills on organic shape elements",
     ],
+    source: "builtin",
   },
   {
     id: "dark-mode-first",
@@ -85,6 +97,7 @@ export const TRENDS: Trend[] = [
       "Use bright accent colors sparingly for CTAs",
       "Ensure WCAG AAA contrast ratios for text",
     ],
+    source: "builtin",
   },
   {
     id: "kinetic-typography",
@@ -100,8 +113,156 @@ export const TRENDS: Trend[] = [
       "Apply text as the primary visual element",
       "Use variable fonts for fluid weight transitions",
     ],
+    source: "builtin",
   },
-  // === Components ===
+  {
+    id: "aurora-gradients",
+    name: "Aurora Gradients",
+    category: "style",
+    description: "Multi-color gradient backgrounds inspired by the Northern Lights. Soft, flowing color transitions with mesh gradient techniques.",
+    keywords: ["aurora", "gradient", "mesh", "colorful", "background"],
+    popularity: 80,
+    year: 2026,
+    figmaPromptHints: [
+      "Use mesh gradients with 3-4 soft colors blending together",
+      "Apply aurora-like color palette: purple, teal, pink, blue",
+      "Use as full-page background or card accent",
+      "Keep foreground elements simple to let gradient shine",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "claymorphism",
+    name: "Claymorphism",
+    category: "style",
+    description: "3D clay-like UI elements with soft, inflated appearance. Combines inner shadows, pastel colors, and rounded shapes for a tactile feel.",
+    keywords: ["clay", "3d", "soft", "pastel", "inflated"],
+    popularity: 68,
+    year: 2026,
+    figmaPromptHints: [
+      "Use pastel color palette with soft inner shadows",
+      "Apply large border-radius (24px+) for inflated look",
+      "Add subtle inner shadow for 3D depth effect",
+      "Use light background with slightly darker element fills",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "retro-pixel",
+    name: "Retro Pixel / 8-bit",
+    category: "style",
+    description: "Nostalgic pixel art aesthetic applied to modern UI. Combines retro gaming visuals with contemporary usability.",
+    keywords: ["pixel", "retro", "8bit", "gaming", "nostalgic"],
+    popularity: 62,
+    year: 2026,
+    figmaPromptHints: [
+      "Use pixel art icons and illustrations",
+      "Apply monospace or pixel fonts for headings",
+      "Use limited color palette (8-16 colors)",
+      "Add pixelated borders and decorative elements",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "minimalist-mono",
+    name: "Minimalist Monochrome",
+    category: "style",
+    description: "Ultra-clean design using a single color plus black and white. Maximum whitespace, minimal elements, typographic hierarchy.",
+    keywords: ["minimal", "monochrome", "clean", "whitespace", "simple"],
+    popularity: 88,
+    year: 2026,
+    figmaPromptHints: [
+      "Use only black, white, and one accent color",
+      "Maximize whitespace between elements",
+      "Rely on typography for visual hierarchy",
+      "Remove all unnecessary decorative elements",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "grain-texture",
+    name: "Grain & Noise Texture",
+    category: "style",
+    description: "Subtle film grain or noise overlays that add warmth and tactile quality to digital interfaces. Creates an analog, premium feel.",
+    keywords: ["grain", "noise", "texture", "film", "analog"],
+    popularity: 74,
+    year: 2026,
+    figmaPromptHints: [
+      "Apply subtle noise/grain texture overlay (5-10% opacity)",
+      "Use warm, muted color palette",
+      "Combine with large typography and minimal layout",
+      "Add grain especially to gradient backgrounds",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "neumorphism-v2",
+    name: "Neumorphism 2.0",
+    category: "style",
+    description: "Evolved soft UI with better accessibility. Combines subtle embossed/debossed effects with clear interactive affordances.",
+    keywords: ["neumorphism", "soft-ui", "emboss", "shadow", "tactile"],
+    popularity: 65,
+    year: 2026,
+    figmaPromptHints: [
+      "Use light gray background (#E0E5EC)",
+      "Apply dual shadows: light top-left, dark bottom-right",
+      "Add clear focus/active states for accessibility",
+      "Use subtle inner shadows for pressed/active states",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "ai-native-aesthetic",
+    name: "AI-Native Aesthetic",
+    category: "style",
+    description: "Design language born from AI tools. Features generated patterns, dynamic compositions, and interfaces that feel computationally crafted.",
+    keywords: ["ai", "generative", "computational", "dynamic", "futuristic"],
+    popularity: 91,
+    year: 2026,
+    figmaPromptHints: [
+      "Use generative/algorithmic patterns as backgrounds",
+      "Apply iridescent or holographic color accents",
+      "Include AI-related UI elements: progress bars, confidence indicators",
+      "Use clean, technical typography (Inter, SF Pro, Geist)",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "japandi-design",
+    name: "Japandi Design",
+    category: "style",
+    description: "Fusion of Japanese minimalism and Scandinavian functionality. Warm neutrals, natural materials, and intentional simplicity.",
+    keywords: ["japandi", "japanese", "scandinavian", "warm", "natural"],
+    popularity: 70,
+    year: 2026,
+    figmaPromptHints: [
+      "Use warm neutral palette: beige, cream, soft brown, charcoal",
+      "Apply generous whitespace and breathing room",
+      "Use serif + sans-serif font pairing",
+      "Include nature-inspired illustrations or photography",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "maximalism",
+    name: "Digital Maximalism",
+    category: "style",
+    description: "Bold, layered, and visually rich design that embraces complexity. Multiple patterns, colors, and textures coexist in organized chaos.",
+    keywords: ["maximalism", "bold", "layered", "complex", "vibrant"],
+    popularity: 66,
+    year: 2026,
+    figmaPromptHints: [
+      "Layer multiple visual elements: patterns, gradients, images",
+      "Use bold, saturated color combinations",
+      "Mix different typography styles and sizes",
+      "Create visual density while maintaining readability",
+    ],
+    source: "builtin",
+  },
+
+  // ===========================
+  // COMPONENTS (10)
+  // ===========================
   {
     id: "floating-action-bar",
     name: "Floating Action Bar",
@@ -116,6 +277,7 @@ export const TRENDS: Trend[] = [
       "Include 3-5 icon actions with labels on hover",
       "Add subtle shadow and rounded corners (999px)",
     ],
+    source: "builtin",
   },
   {
     id: "skeleton-loading",
@@ -131,6 +293,7 @@ export const TRENDS: Trend[] = [
       "Match exact dimensions of final content elements",
       "Use rounded rectangles for text placeholders",
     ],
+    source: "builtin",
   },
   {
     id: "command-palette",
@@ -146,23 +309,127 @@ export const TRENDS: Trend[] = [
       "Add recent searches and suggested actions",
       "Use monospace font for keyboard shortcut badges",
     ],
+    source: "builtin",
   },
   {
-    id: "micro-interactions",
-    name: "Micro-interactions",
-    category: "interaction",
-    description: "Small, purposeful animations that provide feedback, guide users, and add delight. Button hovers, toggle switches, success states.",
-    keywords: ["animation", "micro", "feedback", "hover", "transition"],
-    popularity: 93,
+    id: "toast-notification",
+    name: "Toast Notifications",
+    category: "component",
+    description: "Non-intrusive notification banners that appear temporarily. Supports success, error, warning, and info variants with actions.",
+    keywords: ["toast", "notification", "alert", "snackbar", "feedback"],
+    popularity: 90,
     year: 2026,
     figmaPromptHints: [
-      "Design hover states for all interactive elements",
-      "Include pressed/active states with scale reduction",
-      "Add success/error state animations",
-      "Use spring-based easing curves for natural feel",
+      "Position toasts at top-right or bottom-center",
+      "Include icon, message, and optional action button",
+      "Design 4 variants: success (green), error (red), warning (amber), info (blue)",
+      "Add subtle slide-in animation and auto-dismiss timer",
     ],
+    source: "builtin",
   },
-  // === Patterns ===
+  {
+    id: "avatar-stack",
+    name: "Avatar Stack / Group",
+    category: "component",
+    description: "Overlapping circular avatars showing team members or collaborators. Includes overflow counter for large groups.",
+    keywords: ["avatar", "stack", "team", "users", "collaboration"],
+    popularity: 82,
+    year: 2026,
+    figmaPromptHints: [
+      "Stack 3-5 circular avatars with -8px overlap",
+      "Add 2px white border ring around each avatar",
+      "Include +N overflow counter as last circle",
+      "Size options: sm (24px), md (32px), lg (40px)",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "data-table",
+    name: "Advanced Data Table",
+    category: "component",
+    description: "Feature-rich table with sorting, filtering, pagination, row selection, and inline editing. Essential for SaaS and admin panels.",
+    keywords: ["table", "data", "grid", "sorting", "pagination"],
+    popularity: 89,
+    year: 2026,
+    figmaPromptHints: [
+      "Design a table with header row, zebra striping, and hover states",
+      "Include sort indicators (arrows) in column headers",
+      "Add checkbox column for row selection",
+      "Include pagination bar with page numbers and items-per-page selector",
+      "Add search/filter bar above the table",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "empty-state",
+    name: "Empty State",
+    category: "component",
+    description: "Friendly, informative placeholder shown when no data is available. Guides users toward their first action.",
+    keywords: ["empty", "placeholder", "onboarding", "zero-state", "illustration"],
+    popularity: 79,
+    year: 2026,
+    figmaPromptHints: [
+      "Center a friendly illustration (150-200px)",
+      "Add clear headline explaining the empty state",
+      "Include descriptive subtext with guidance",
+      "Add primary CTA button to take first action",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "ai-chat-interface",
+    name: "AI Chat Interface",
+    category: "component",
+    description: "Conversational UI for AI assistants with message bubbles, typing indicators, suggested prompts, and code blocks.",
+    keywords: ["chat", "ai", "conversation", "assistant", "chatbot"],
+    popularity: 96,
+    year: 2026,
+    figmaPromptHints: [
+      "Design message bubbles: user (right-aligned, accent color) and AI (left-aligned, neutral)",
+      "Include typing indicator with animated dots",
+      "Add suggested prompt chips below the input",
+      "Support code blocks with syntax highlighting in messages",
+      "Include input bar with send button and attachment option",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "stepper-progress",
+    name: "Stepper / Progress Indicator",
+    category: "component",
+    description: "Multi-step progress indicator showing completed, current, and upcoming steps. Used in wizards, checkouts, and onboarding.",
+    keywords: ["stepper", "progress", "steps", "wizard", "indicator"],
+    popularity: 83,
+    year: 2026,
+    figmaPromptHints: [
+      "Design horizontal stepper with numbered circles connected by lines",
+      "Show 3 states: completed (check icon, filled), current (highlighted), upcoming (outline)",
+      "Include step labels below each circle",
+      "Use accent color for completed and current steps",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "contextual-menu",
+    name: "Contextual / Right-click Menu",
+    category: "component",
+    description: "Context-aware dropdown menu triggered by right-click or long-press. Groups related actions with dividers and keyboard shortcuts.",
+    keywords: ["context-menu", "dropdown", "right-click", "actions", "menu"],
+    popularity: 81,
+    year: 2026,
+    figmaPromptHints: [
+      "Design a floating menu with grouped action items",
+      "Include dividers between action groups",
+      "Show keyboard shortcuts right-aligned in each row",
+      "Add hover state with subtle background highlight",
+      "Include icons for common actions (copy, paste, delete)",
+    ],
+    source: "builtin",
+  },
+
+  // ===========================
+  // PATTERNS (10)
+  // ===========================
   {
     id: "saas-pricing",
     name: "SaaS Pricing Page",
@@ -178,6 +445,7 @@ export const TRENDS: Trend[] = [
       "Include feature comparison checklist below each plan",
       "Use clear CTA buttons with contrasting colors",
     ],
+    source: "builtin",
   },
   {
     id: "onboarding-flow",
@@ -193,6 +461,7 @@ export const TRENDS: Trend[] = [
       "Include skip option and back navigation",
       "Add conversational tone to instructions",
     ],
+    source: "builtin",
   },
   {
     id: "dashboard-analytics",
@@ -209,6 +478,7 @@ export const TRENDS: Trend[] = [
       "Use consistent data visualization color palette",
       "Include sidebar navigation with collapsible sections",
     ],
+    source: "builtin",
   },
   {
     id: "auth-minimal",
@@ -225,8 +495,114 @@ export const TRENDS: Trend[] = [
       "Minimal form fields with inline validation",
       "Use brand illustration or gradient on the left panel",
     ],
+    source: "builtin",
   },
-  // === Layouts ===
+  {
+    id: "settings-page",
+    name: "Settings / Preferences Page",
+    category: "pattern",
+    description: "Organized settings interface with categorized sections, toggle switches, and clear descriptions for each option.",
+    keywords: ["settings", "preferences", "config", "options", "account"],
+    popularity: 81,
+    year: 2026,
+    figmaPromptHints: [
+      "Use left sidebar for settings categories, content area on right",
+      "Group related settings with section headers",
+      "Use toggle switches for on/off settings",
+      "Include descriptive text below each setting label",
+      "Add save/cancel buttons at the bottom or auto-save indicator",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "ecommerce-pdp",
+    name: "E-commerce Product Detail Page",
+    category: "pattern",
+    description: "Product page with image gallery, variant selector, reviews, and add-to-cart. Optimized for conversion and mobile responsiveness.",
+    keywords: ["ecommerce", "product", "shop", "cart", "detail"],
+    popularity: 87,
+    year: 2026,
+    figmaPromptHints: [
+      "Split layout: image gallery left (60%), product info right (40%)",
+      "Include thumbnail image carousel with zoom capability",
+      "Add size/color variant selectors",
+      "Show price, rating stars, and review count",
+      "Include prominent Add to Cart button and wishlist icon",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "notification-center",
+    name: "Notification Center",
+    category: "pattern",
+    description: "Centralized notification panel with categorized alerts, read/unread states, and actionable items. Slide-out or dropdown format.",
+    keywords: ["notification", "alerts", "inbox", "updates", "bell"],
+    popularity: 83,
+    year: 2026,
+    figmaPromptHints: [
+      "Design a slide-out panel from the right side",
+      "Group notifications by date (Today, Yesterday, Earlier)",
+      "Show unread indicator (blue dot) and read state (dimmed)",
+      "Include notification type icons and timestamps",
+      "Add 'Mark all as read' and filter options at top",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "kanban-board",
+    name: "Kanban Board",
+    category: "pattern",
+    description: "Column-based task management board with draggable cards. Supports labels, assignees, due dates, and swimlanes.",
+    keywords: ["kanban", "board", "tasks", "project", "drag-drop"],
+    popularity: 88,
+    year: 2026,
+    figmaPromptHints: [
+      "Create 4-5 columns: Backlog, To Do, In Progress, Review, Done",
+      "Design task cards with title, labels, assignee avatar, and due date",
+      "Include column header with task count and add button",
+      "Show drag handle indicator on cards",
+      "Add color-coded labels for priority/category",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "file-upload",
+    name: "File Upload / Drag & Drop",
+    category: "pattern",
+    description: "Drag-and-drop file upload zone with progress indicators, file type validation, and upload queue management.",
+    keywords: ["upload", "file", "drag-drop", "progress", "attachment"],
+    popularity: 80,
+    year: 2026,
+    figmaPromptHints: [
+      "Design a dashed-border drop zone with upload icon",
+      "Show drag-over state with highlighted border and background",
+      "Include file list with name, size, type icon, and progress bar",
+      "Add remove/cancel button for each file",
+      "Show supported file types and size limit text",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "landing-page-saas",
+    name: "SaaS Landing Page",
+    category: "pattern",
+    description: "Complete landing page structure with hero, features, social proof, pricing, and CTA sections. Optimized for conversion.",
+    keywords: ["landing", "saas", "marketing", "conversion", "homepage"],
+    popularity: 93,
+    year: 2026,
+    figmaPromptHints: [
+      "Hero section: headline, subtext, CTA button, and product screenshot",
+      "Logo bar with 5-6 trusted company logos",
+      "3-column feature grid with icons and descriptions",
+      "Testimonial section with avatar, quote, and company",
+      "Final CTA section with contrasting background",
+    ],
+    source: "builtin",
+  },
+
+  // ===========================
+  // LAYOUTS (8)
+  // ===========================
   {
     id: "hero-split",
     name: "Split Hero Section",
@@ -241,6 +617,7 @@ export const TRENDS: Trend[] = [
       "Use product screenshot or 3D illustration on the right",
       "Add subtle background gradient or pattern",
     ],
+    source: "builtin",
   },
   {
     id: "sidebar-nav",
@@ -257,6 +634,7 @@ export const TRENDS: Trend[] = [
       "Use subtle hover and active states for menu items",
       "Include section dividers and group labels",
     ],
+    source: "builtin",
   },
   {
     id: "mobile-bottom-sheet",
@@ -273,6 +651,7 @@ export const TRENDS: Trend[] = [
       "Include dimmed backdrop overlay",
       "Add swipe-to-dismiss gesture indicator",
     ],
+    source: "builtin",
   },
   {
     id: "responsive-cards",
@@ -288,30 +667,294 @@ export const TRENDS: Trend[] = [
       "Use 16px rounded corners and subtle shadow",
       "Show responsive breakpoints: desktop (3col), tablet (2col), mobile (1col)",
     ],
+    source: "builtin",
+  },
+  {
+    id: "masonry-layout",
+    name: "Masonry / Pinterest Layout",
+    category: "layout",
+    description: "Variable-height card layout that fills space efficiently like a brick wall. Ideal for image-heavy content and portfolios.",
+    keywords: ["masonry", "pinterest", "waterfall", "gallery", "variable-height"],
+    popularity: 79,
+    year: 2026,
+    figmaPromptHints: [
+      "Create a multi-column layout with variable-height cards",
+      "Use 3-4 columns with 16px gap",
+      "Cards contain images of different aspect ratios",
+      "Add subtle hover effect with overlay and title",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "sticky-header",
+    name: "Sticky Header with Scroll Transition",
+    category: "layout",
+    description: "Navigation header that stays fixed on scroll with visual transition: shrinks, adds blur, or changes background on scroll.",
+    keywords: ["sticky", "header", "navbar", "fixed", "scroll"],
+    popularity: 86,
+    year: 2026,
+    figmaPromptHints: [
+      "Design two header states: expanded (transparent, large) and scrolled (compact, blurred bg)",
+      "Include logo, navigation links, and CTA button",
+      "Show transition between states",
+      "Add backdrop blur effect in scrolled state",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "full-bleed-sections",
+    name: "Full-Bleed Alternating Sections",
+    category: "layout",
+    description: "Full-width content sections that alternate between light and dark backgrounds. Creates visual rhythm and clear content separation.",
+    keywords: ["full-bleed", "sections", "alternating", "landing", "scroll"],
+    popularity: 85,
+    year: 2026,
+    figmaPromptHints: [
+      "Alternate between light (#FFFFFF) and dark (#0A0A0A) full-width sections",
+      "Each section: 80-120px vertical padding",
+      "Center content in max-width container (1200px)",
+      "Use contrasting text colors for each section",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "z-pattern-layout",
+    name: "Z-Pattern Feature Layout",
+    category: "layout",
+    description: "Alternating image-left/text-right and text-left/image-right sections that guide the eye in a Z-pattern down the page.",
+    keywords: ["z-pattern", "zigzag", "features", "alternating", "marketing"],
+    popularity: 84,
+    year: 2026,
+    figmaPromptHints: [
+      "Alternate image and text placement: left-right, right-left",
+      "Each section: feature illustration + headline + description + link",
+      "Use consistent spacing (80px) between sections",
+      "Add subtle connecting elements between sections",
+    ],
+    source: "builtin",
+  },
+
+  // ===========================
+  // INTERACTIONS (7)
+  // ===========================
+  {
+    id: "micro-interactions",
+    name: "Micro-interactions",
+    category: "interaction",
+    description: "Small, purposeful animations that provide feedback, guide users, and add delight. Button hovers, toggle switches, success states.",
+    keywords: ["animation", "micro", "feedback", "hover", "transition"],
+    popularity: 93,
+    year: 2026,
+    figmaPromptHints: [
+      "Design hover states for all interactive elements",
+      "Include pressed/active states with scale reduction",
+      "Add success/error state animations",
+      "Use spring-based easing curves for natural feel",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "scroll-animations",
+    name: "Scroll-triggered Animations",
+    category: "interaction",
+    description: "Elements that animate into view as the user scrolls. Fade-in, slide-up, and parallax effects create engaging scroll experiences.",
+    keywords: ["scroll", "parallax", "fade-in", "reveal", "animation"],
+    popularity: 87,
+    year: 2026,
+    figmaPromptHints: [
+      "Design before/after states for scroll-triggered elements",
+      "Show fade-in-up animation: start 20px below, opacity 0 → visible",
+      "Stagger animation timing for grouped elements",
+      "Include parallax effect for background images",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "gesture-navigation",
+    name: "Gesture-based Navigation",
+    category: "interaction",
+    description: "Swipe, pinch, and drag gestures for mobile navigation. Replaces button taps with natural touch interactions.",
+    keywords: ["gesture", "swipe", "touch", "mobile", "drag"],
+    popularity: 81,
+    year: 2026,
+    figmaPromptHints: [
+      "Design swipe-left to delete with red reveal background",
+      "Show swipe-right to archive with green reveal",
+      "Include gesture hint indicators for first-time users",
+      "Design pull-to-refresh animation at top",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "haptic-feedback-design",
+    name: "Haptic Feedback Design",
+    category: "interaction",
+    description: "Visual representations of tactile feedback. Design cues that suggest physical responses like button presses, toggles, and confirmations.",
+    keywords: ["haptic", "tactile", "feedback", "physical", "press"],
+    popularity: 73,
+    year: 2026,
+    figmaPromptHints: [
+      "Design button with clear pressed state (scale 0.95, darker shade)",
+      "Show toggle switch with smooth transition animation",
+      "Include ripple effect on tap for material-style feedback",
+      "Design confirmation animation with checkmark bounce",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "dark-light-toggle",
+    name: "Dark/Light Mode Toggle",
+    category: "interaction",
+    description: "Smooth transition between dark and light color schemes. Includes animated toggle switch and seamless color transitions.",
+    keywords: ["dark-mode", "light-mode", "toggle", "theme", "switch"],
+    popularity: 89,
+    year: 2026,
+    figmaPromptHints: [
+      "Design a toggle switch with sun/moon icons",
+      "Show both dark and light versions of the same screen",
+      "Use smooth color transition between modes",
+      "Ensure all elements maintain contrast in both modes",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "infinite-scroll",
+    name: "Infinite Scroll with Loading",
+    category: "interaction",
+    description: "Continuous content loading as user scrolls. Includes loading indicators, skeleton states, and end-of-content messaging.",
+    keywords: ["infinite-scroll", "lazy-load", "pagination", "feed", "continuous"],
+    popularity: 85,
+    year: 2026,
+    figmaPromptHints: [
+      "Show content feed with cards/posts",
+      "Include loading spinner or skeleton at the bottom",
+      "Design 'You've reached the end' state",
+      "Add scroll-to-top floating button",
+    ],
+    source: "builtin",
+  },
+  {
+    id: "drag-reorder",
+    name: "Drag to Reorder",
+    category: "interaction",
+    description: "Draggable list items that can be reordered by the user. Includes grab handles, drop indicators, and smooth repositioning.",
+    keywords: ["drag", "reorder", "sortable", "list", "handle"],
+    popularity: 80,
+    year: 2026,
+    figmaPromptHints: [
+      "Design list items with 6-dot grab handle on the left",
+      "Show dragging state: elevated card with shadow, slight rotation",
+      "Include drop zone indicator (blue line between items)",
+      "Show before and after states of the reorder",
+    ],
+    source: "builtin",
   },
 ];
 
+// ============================================
+// Dynamic Trend Storage (user & AI-generated)
+// ============================================
+
+import fs from "fs";
+import path from "path";
+import os from "os";
+
+const CUSTOM_TRENDS_DIR = path.join(os.homedir(), ".designnn");
+const CUSTOM_TRENDS_FILE = path.join(CUSTOM_TRENDS_DIR, "custom-trends.json");
+
+function ensureCustomDir(): void {
+  if (!fs.existsSync(CUSTOM_TRENDS_DIR)) {
+    fs.mkdirSync(CUSTOM_TRENDS_DIR, { recursive: true });
+  }
+}
+
+export function loadCustomTrends(): Trend[] {
+  try {
+    if (fs.existsSync(CUSTOM_TRENDS_FILE)) {
+      const data = fs.readFileSync(CUSTOM_TRENDS_FILE, "utf-8");
+      return JSON.parse(data);
+    }
+  } catch {
+    // If file is corrupted, return empty
+  }
+  return [];
+}
+
+export function saveCustomTrends(trends: Trend[]): void {
+  ensureCustomDir();
+  fs.writeFileSync(CUSTOM_TRENDS_FILE, JSON.stringify(trends, null, 2), "utf-8");
+}
+
+export function addCustomTrend(trend: Trend): void {
+  const customs = loadCustomTrends();
+  // Replace if same id exists
+  const idx = customs.findIndex((t) => t.id === trend.id);
+  if (idx >= 0) {
+    customs[idx] = trend;
+  } else {
+    customs.push(trend);
+  }
+  saveCustomTrends(customs);
+}
+
+export function removeCustomTrend(id: string): boolean {
+  const customs = loadCustomTrends();
+  const filtered = customs.filter((t) => t.id !== id);
+  if (filtered.length === customs.length) return false;
+  saveCustomTrends(filtered);
+  return true;
+}
+
+// ============================================
+// Unified Trend Access (builtin + custom)
+// ============================================
+
+export function getAllTrends(): Trend[] {
+  return [...BUILTIN_TRENDS, ...loadCustomTrends()];
+}
+
+// Keep TRENDS as a getter for backward compatibility
+export const TRENDS = getAllTrends();
+
 export function searchTrends(query: string): Trend[] {
   const q = query.toLowerCase();
-  return TRENDS.filter(
-    (t) =>
-      t.name.toLowerCase().includes(q) ||
-      t.description.toLowerCase().includes(q) ||
-      t.keywords.some((k) => k.includes(q)) ||
-      t.category.includes(q)
-  ).sort((a, b) => b.popularity - a.popularity);
+  return getAllTrends()
+    .filter(
+      (t) =>
+        t.name.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q) ||
+        t.keywords.some((k) => k.includes(q)) ||
+        t.category.includes(q)
+    )
+    .sort((a, b) => b.popularity - a.popularity);
 }
 
 export function getTrendById(id: string): Trend | undefined {
-  return TRENDS.find((t) => t.id === id);
+  return getAllTrends().find((t) => t.id === id);
 }
 
 export function getTrendsByCategory(category: Trend["category"]): Trend[] {
-  return TRENDS.filter((t) => t.category === category).sort(
-    (a, b) => b.popularity - a.popularity
-  );
+  return getAllTrends()
+    .filter((t) => t.category === category)
+    .sort((a, b) => b.popularity - a.popularity);
 }
 
 export function getTopTrends(limit: number = 10): Trend[] {
-  return [...TRENDS].sort((a, b) => b.popularity - a.popularity).slice(0, limit);
+  return getAllTrends()
+    .sort((a, b) => b.popularity - a.popularity)
+    .slice(0, limit);
+}
+
+export function getTrendStats(): { total: number; builtin: number; custom: number; categories: Record<string, number> } {
+  const all = getAllTrends();
+  const categories: Record<string, number> = {};
+  for (const t of all) {
+    categories[t.category] = (categories[t.category] || 0) + 1;
+  }
+  return {
+    total: all.length,
+    builtin: BUILTIN_TRENDS.length,
+    custom: loadCustomTrends().length,
+    categories,
+  };
 }

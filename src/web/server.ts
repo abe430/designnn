@@ -2,11 +2,12 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
-  TRENDS,
+  getAllTrends,
   searchTrends,
   getTrendById,
   getTrendsByCategory,
   getTopTrends,
+  getTrendStats,
 } from "../data/trends.js";
 import {
   generateChatPrompt,
@@ -31,7 +32,7 @@ export function createServer(port: number = 3333) {
   app.get("/api/trends", (req, res) => {
     const { category, search, top } = req.query;
 
-    let results = TRENDS;
+    let results;
 
     if (category && typeof category === "string") {
       results = getTrendsByCategory(category as any);
@@ -40,7 +41,7 @@ export function createServer(port: number = 3333) {
     } else if (top && typeof top === "string") {
       results = getTopTrends(parseInt(top, 10));
     } else {
-      results = getTopTrends(100);
+      results = getTopTrends(200); // Get all, sorted by popularity
     }
 
     res.json({ trends: results, total: results.length });
@@ -58,8 +59,14 @@ export function createServer(port: number = 3333) {
 
   // GET /api/categories - List all categories
   app.get("/api/categories", (_req, res) => {
-    const categories = [...new Set(TRENDS.map((t) => t.category))];
+    const categories = [...new Set(getAllTrends().map((t) => t.category))];
     res.json({ categories });
+  });
+
+  // GET /api/stats - Get trend database statistics
+  app.get("/api/stats", (_req, res) => {
+    const stats = getTrendStats();
+    res.json(stats);
   });
 
   // POST /api/chat - Generate prompt from natural language
@@ -139,10 +146,12 @@ export function createServer(port: number = 3333) {
 export function startWebServer(port: number = 3333): void {
   const app = createServer(port);
   app.listen(port, () => {
+    const stats = getTrendStats();
     console.log("");
     console.log(`  \x1b[1m\x1b[38;2;204;255;0mDESIGNNN\x1b[0m \x1b[90mWeb UI\x1b[0m`);
     console.log(`  \x1b[90m────────────────────────────────\x1b[0m`);
     console.log(`  \x1b[90mLocal:\x1b[0m   \x1b[36mhttp://localhost:${port}\x1b[0m`);
+    console.log(`  \x1b[90mTrends:\x1b[0m  \x1b[38;2;204;255;0m${stats.total}\x1b[0m \x1b[90m(${stats.builtin} built-in, ${stats.custom} custom)\x1b[0m`);
     console.log(`  \x1b[90m────────────────────────────────\x1b[0m`);
     console.log(`  \x1b[90mPress Ctrl+C to stop\x1b[0m`);
     console.log("");

@@ -69,9 +69,12 @@ designnn chat "E-commerce product page with glassmorphism style"
 
 #### 2. Explore Trends
 
-Browse the built-in design trend database:
+Browse the built-in design trend database (50+ trends):
 
 ```bash
+# Show all trends
+designnn explore
+
 # Show top 10 trends
 designnn explore --top 10
 
@@ -79,6 +82,8 @@ designnn explore --top 10
 designnn explore --category style
 designnn explore --category component
 designnn explore --category pattern
+designnn explore --category layout
+designnn explore --category interaction
 
 # Search by keyword
 designnn explore --component "bento"
@@ -92,12 +97,55 @@ designnn explore --generate bento-ui
 Combine two design trends into something new:
 
 ```bash
-designnn mix "Bento UI" "Glassmorphism"
+designnn mix "bento-ui" "glassmorphism"
 designnn mix "neubrutalism" "dark-mode-first" --context "for a music streaming app"
 designnn mix "kinetic-typography" "organic-shapes" --context "landing page for a creative agency"
 ```
 
-#### 4. Web UI
+#### 4. Update Trends (AI Research)
+
+Research and add new design trends to the database using AI:
+
+```bash
+# Research 5 new trends (default)
+designnn update
+
+# Research a specific number of trends
+designnn update --count 10
+
+# Focus on a specific category
+designnn update --category interaction
+
+# Clear all custom (AI-generated) trends
+designnn update --reset
+```
+
+#### 5. Database Stats
+
+View trend database statistics:
+
+```bash
+designnn stats
+```
+
+```
+  Overview
+  ─────────────────────────────────
+  Total Trends:    53
+  Built-in:        50
+  AI-Generated:    3
+  User-Added:      0
+
+  By Category
+  ─────────────────────────────────
+  ◆ style          ████████░░░░░░░ 16
+  ◇ component      ██████░░░░░░░░░ 11
+  ▣ pattern        █████░░░░░░░░░░ 10
+  ▤ layout         ████░░░░░░░░░░░ 8
+  ▥ interaction    ████░░░░░░░░░░░ 8
+```
+
+#### 6. Web UI
 
 Launch the DESIGNNN Web UI in your browser:
 
@@ -110,7 +158,7 @@ designnn serve --port 8080
 
 The Web UI provides a visual interface for all DESIGNNN features — Chat, Explore, and Mix — with a sleek dark theme and one-click prompt copying.
 
-#### 5. MCP Server (AI Agent Integration)
+#### 7. MCP Server (AI Agent Integration)
 
 Start DESIGNNN as an MCP server for integration with AI agents like Claude Code, Codex, or OpenCode:
 
@@ -142,29 +190,38 @@ designnn agent
 
 ## Design Trends Database
 
-DESIGNNN includes a curated database of 18+ current UI/UX design trends:
+DESIGNNN includes a curated database of **50+ current UI/UX design trends** across 5 categories, with AI-powered live expansion:
 
-| Category | Trends |
-|---|---|
-| **Style** | Bento UI, Glassmorphism, Neubrutalism, Organic Shapes, Dark Mode First, Kinetic Typography |
-| **Component** | Floating Action Bar, Skeleton Loading, Command Palette |
-| **Pattern** | SaaS Pricing, Progressive Onboarding, Analytics Dashboard, Minimal Auth |
-| **Layout** | Split Hero, Collapsible Sidebar, Mobile Bottom Sheet, Responsive Card Grid |
-| **Interaction** | Micro-interactions |
+| Category | Count | Examples |
+|---|---|---|
+| **Style** | 15 | Bento UI, Glassmorphism, Neubrutalism, Dark Mode First, AI-Native Aesthetic, Japandi, Aurora Gradients |
+| **Component** | 10 | AI Chat Interface, Command Palette, Skeleton Loading, Data Table, Toast Notifications |
+| **Pattern** | 10 | SaaS Landing Page, Analytics Dashboard, Kanban Board, E-commerce PDP, Notification Center |
+| **Layout** | 8 | Responsive Card Grid, Split Hero, Masonry Layout, Z-Pattern, Sticky Header |
+| **Interaction** | 7 | Micro-interactions, Scroll Animations, Gesture Navigation, Dark/Light Toggle |
+
+Use `designnn update` to research and add new trends via AI — the database grows with every update.
 
 ## How It Works
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌──────────────┐     ┌───────────┐
 │  User Input  │ ──▶ │  Trend DB    │ ──▶ │  LLM Engine  │ ──▶ │  Figma AI │
-│  (CLI/MCP)   │     │  (18+ trends)│     │  (GPT-4.1)   │     │  Prompt   │
+│  (CLI/MCP)   │     │  (50+ trends)│     │  (GPT-4.1)   │     │  Prompt   │
 └─────────────┘     └──────────────┘     └──────────────┘     └───────────┘
+                          ▲
+                          │
+                    ┌─────┴──────┐
+                    │  AI Update  │  ← designnn update
+                    │  (Research) │
+                    └────────────┘
 ```
 
-1. **Input**: Describe what you want to design (CLI or MCP)
+1. **Input**: Describe what you want to design (CLI, Web UI, or MCP)
 2. **Trend Analysis**: DESIGNNN matches your request with current design trends
 3. **Prompt Generation**: GPT-4.1 generates a detailed, Figma AI-optimized prompt
 4. **Output**: Copy the prompt and paste it into Figma AI (Ctrl+I / Cmd+I)
+5. **Update**: Run `designnn update` to research and add new trends via AI
 
 ## Configuration
 
@@ -199,10 +256,13 @@ Contributions are welcome! Here are some ways you can help:
 - [x] CLI core (chat, explore, mix)
 - [x] MCP server integration
 - [x] Web UI (`designnn serve`)
-- [ ] Live trend data from Dribbble, Awwwards, Behance
+- [x] 50+ built-in design trends
+- [x] AI-powered trend research (`designnn update`)
+- [x] Database statistics (`designnn stats`)
 - [ ] Figma plugin for direct integration
 - [ ] Multi-language prompt support
 - [ ] Community trend submissions
+- [ ] Scheduled auto-update via cron
 
 ## License
 

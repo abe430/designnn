@@ -13,9 +13,12 @@ program
   .description(
     "Trend-driven design prompt engine for Figma AI.\nGenerate high-quality UI/UX prompts powered by real-time design trend analysis."
   )
-  .version("0.1.0")
-  .hook("preAction", () => {
-    printBanner();
+  .version("0.2.0")
+  .hook("preAction", (thisCommand) => {
+    // Don't print banner for agent command (stdout is used for MCP protocol)
+    if (thisCommand.name() !== "agent") {
+      printBanner();
+    }
   });
 
 // === chat command ===
@@ -47,6 +50,27 @@ program
     await mixCommand(trend1, trend2, options);
   });
 
+// === update command ===
+program
+  .command("update")
+  .description("Research and add new design trends to the database using AI")
+  .option("-n, --count <number>", "Number of new trends to research", "5")
+  .option("-c, --category <category>", "Focus research on a specific category")
+  .option("--reset", "Clear all custom (AI-generated & user) trends")
+  .action(async (options) => {
+    const { updateCommand } = await import("./commands/update.js");
+    await updateCommand(options);
+  });
+
+// === stats command ===
+program
+  .command("stats")
+  .description("Show trend database statistics")
+  .action(async () => {
+    const { statsCommand } = await import("./commands/stats.js");
+    await statsCommand();
+  });
+
 // === serve command ===
 program
   .command("serve")
@@ -63,7 +87,6 @@ program
   .command("agent")
   .description("Start DESIGNNN as an MCP server for AI agent integration")
   .action(async () => {
-    // Don't print banner for MCP server (stdout is used for protocol)
     const { startMcpServer } = await import("./mcp/server.js");
     await startMcpServer();
   });
