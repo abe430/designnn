@@ -1,0 +1,38 @@
+{
+  "name": "designnn",
+  "version": "0.1.0",
+  "description": "Trend-driven design prompt engine for Figma AI. Generate high-quality UI/UX prompts powered by real-time design trend analysis.",
+  "type": "module",
+  "bin": {
+    "designnn": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "bun build src/cli.ts --outdir dist --target node",
+    "dev": "bun run src/cli.ts",
+    "start": "node dist/cli.js"
+  },
+  "keywords": [
+    "design", "figma", "ai", "prompt", "ui", "ux", "trend", "mcp", "cli"
+  ],
+  "author": "concepter (Yoshihisa Abe)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concepter/designnn"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "openai": "^6.29.0",
+    "ora": "^9.3.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.3"
+  }
+}
