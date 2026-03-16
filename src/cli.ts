@@ -47,6 +47,17 @@ program
     await mixCommand(trend1, trend2, options);
   });
 
+// === serve command ===
+program
+  .command("serve")
+  .description("Start DESIGNNN Web UI in your browser")
+  .option("-p, --port <number>", "Port number", "3333")
+  .action(async (options) => {
+    const port = parseInt(options.port, 10);
+    const { startWebServer } = await import("./web/server.js");
+    startWebServer(port);
+  });
+
 // === agent command ===
 program
   .command("agent")

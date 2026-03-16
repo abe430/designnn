@@ -97,7 +97,20 @@ designnn mix "neubrutalism" "dark-mode-first" --context "for a music streaming a
 designnn mix "kinetic-typography" "organic-shapes" --context "landing page for a creative agency"
 ```
 
-#### 4. MCP Server (AI Agent Integration)
+#### 4. Web UI
+
+Launch the DESIGNNN Web UI in your browser:
+
+```bash
+designnn serve
+
+# Custom port
+designnn serve --port 8080
+```
+
+The Web UI provides a visual interface for all DESIGNNN features — Chat, Explore, and Mix — with a sleek dark theme and one-click prompt copying.
+
+#### 5. MCP Server (AI Agent Integration)
 
 Start DESIGNNN as an MCP server for integration with AI agents like Claude Code, Codex, or OpenCode:
 
@@ -185,7 +198,7 @@ Contributions are welcome! Here are some ways you can help:
 
 - [x] CLI core (chat, explore, mix)
 - [x] MCP server integration
-- [ ] Web UI (`designnn serve`)
+- [x] Web UI (`designnn serve`)
 - [ ] Live trend data from Dribbble, Awwwards, Behance
 - [ ] Figma plugin for direct integration
 - [ ] Multi-language prompt support
