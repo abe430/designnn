@@ -1,6 +1,6 @@
 {
   "name": "designnn",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Trend-driven design prompt engine for Figma AI. Generate high-quality UI/UX prompts powered by real-time design trend analysis.",
   "type": "module",
   "bin": {
@@ -26,8 +26,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/concepter/designnn"
+    "url": "https://github.com/abe430/designnn"
   },
+  "files": [
+    "dist/",
+    "public/",
+    "README.md",
+    "LICENSE"
+  ],
   "engines": {
     "node": ">=18.0.0"
   },

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DESIGNNN — Trend-driven Design Prompt Engine</title>
+  <title>DESIGNNN — Trend-driven Design Prompt Engine for Figma AI</title>
+  <meta name="description" content="Generate high-quality UI/UX design prompts powered by real-time design trend analysis. Built for Figma AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -13,17 +14,36 @@
   <!-- Header -->
   <header class="header">
     <div class="header-left">
-      <h1 class="logo">DESIGNNN</h1>
+      <h1 class="logo">DESIGN<span class="logo-accent">NNN</span></h1>
       <span class="tagline">for Figma AI</span>
+      <span class="version-badge" id="version-badge">v0.3.0</span>
     </div>
     <nav class="nav">
-      <button class="nav-btn active" data-tab="chat">Chat</button>
-      <button class="nav-btn" data-tab="explore">Explore</button>
-      <button class="nav-btn" data-tab="mix">Mix</button>
+      <button class="nav-btn active" data-tab="chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Chat
+      </button>
+      <button class="nav-btn" data-tab="explore">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        Explore
+      </button>
+      <button class="nav-btn" data-tab="mix">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+        Mix
+      </button>
+      <button class="nav-btn" data-tab="stats">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        Stats
+      </button>
     </nav>
-    <a href="https://github.com/abe430/designnn" target="_blank" class="github-link">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-    </a>
+    <div class="header-right">
+      <a href="https://www.npmjs.com/package/designnn" target="_blank" class="header-link" title="npm">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.664H5.334v-4H3.999v4H1.335V8.667h5.331v5.331zm4 0h-2.666V8.667h2.666v5.331zm12 0h-1.333v-4h-1.333v4h-1.334v-4h-1.333v4h-2.666V8.667h8v5.331z"/></svg>
+      </a>
+      <a href="https://github.com/abe430/designnn" target="_blank" class="header-link" title="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
   </header>
 
   <!-- Main Content -->
@@ -32,19 +52,27 @@
     <section class="tab-content active" id="tab-chat">
       <div class="tab-hero">
         <h2>Chat to Prompt</h2>
-        <p>Describe what you want to design. DESIGNNN will generate an optimized Figma AI prompt.</p>
+        <p>Describe what you want to design. DESIGNNN will generate an optimized Figma AI prompt powered by <span class="highlight">65+ design trends</span>.</p>
       </div>
       <div class="chat-container">
         <div class="input-group">
-          <input type="text" id="chat-input" placeholder="e.g., SaaS dashboard with analytics charts and dark theme" autocomplete="off" />
-          <button id="chat-submit" class="btn-primary">Generate</button>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            <input type="text" id="chat-input" placeholder="e.g., SaaS dashboard with analytics charts and dark theme" autocomplete="off" />
+          </div>
+          <button id="chat-submit" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Generate
+          </button>
         </div>
         <div class="quick-prompts">
           <span class="quick-label">Try:</span>
           <button class="quick-btn" data-prompt="Landing page for a fitness app with bold typography">Fitness Landing</button>
           <button class="quick-btn" data-prompt="E-commerce product page with glassmorphism style">E-commerce Glass</button>
-          <button class="quick-btn" data-prompt="Mobile onboarding flow for a meditation app">Meditation Onboarding</button>
+          <button class="quick-btn" data-prompt="Mobile onboarding flow for a meditation app">Meditation App</button>
           <button class="quick-btn" data-prompt="SaaS pricing page with dark theme and neon accents">SaaS Pricing</button>
+          <button class="quick-btn" data-prompt="Dashboard with bento grid layout and data visualization">Bento Dashboard</button>
+          <button class="quick-btn" data-prompt="Portfolio website with retrofuturism aesthetic">Retrofuturism Portfolio</button>
         </div>
         <div id="chat-result" class="result-area hidden"></div>
       </div>
@@ -54,17 +82,24 @@
     <section class="tab-content" id="tab-explore">
       <div class="tab-hero">
         <h2>Explore Trends</h2>
-        <p>Browse 18+ curated UI/UX design trends. Click any trend to generate a Figma AI prompt.</p>
+        <p>Browse <span class="highlight" id="trend-count">65+</span> curated UI/UX design trends. Click any trend to generate a Figma AI prompt.</p>
       </div>
       <div class="explore-container">
-        <div class="filter-bar">
-          <button class="filter-btn active" data-category="all">All</button>
-          <button class="filter-btn" data-category="style">Style</button>
-          <button class="filter-btn" data-category="component">Component</button>
-          <button class="filter-btn" data-category="pattern">Pattern</button>
-          <button class="filter-btn" data-category="layout">Layout</button>
-          <button class="filter-btn" data-category="interaction">Interaction</button>
+        <div class="explore-toolbar">
+          <div class="filter-bar">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="style">Style</button>
+            <button class="filter-btn" data-category="component">Component</button>
+            <button class="filter-btn" data-category="pattern">Pattern</button>
+            <button class="filter-btn" data-category="layout">Layout</button>
+            <button class="filter-btn" data-category="interaction">Interaction</button>
+          </div>
+          <div class="search-bar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="explore-search" placeholder="Search trends..." />
+          </div>
         </div>
+        <div class="trends-count" id="trends-count-label"></div>
         <div id="trends-grid" class="trends-grid"></div>
         <div id="explore-result" class="result-area hidden"></div>
       </div>
@@ -78,17 +113,18 @@
       </div>
       <div class="mix-container">
         <div class="mix-selectors">
-          <div class="mix-slot" id="mix-slot-1">
+          <div class="mix-slot">
             <div class="slot-label">Trend 1</div>
             <select id="mix-select-1" class="mix-select">
               <option value="">Select a trend...</option>
             </select>
           </div>
           <div class="mix-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v1.59L18 8z"/><circle cx="12" cy="12" r="3"/><path d="M6 16h1v2c0 2.76 2.24 5 5 5s5-2.24 5-5v-1.59"/></svg>
-            <span>MIX</span>
+            <div class="mix-icon-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
           </div>
-          <div class="mix-slot" id="mix-slot-2">
+          <div class="mix-slot">
             <div class="slot-label">Trend 2</div>
             <select id="mix-select-2" class="mix-select">
               <option value="">Select a trend...</option>
@@ -98,15 +134,32 @@
         <div class="context-group">
           <input type="text" id="mix-context" placeholder="Additional context (optional): e.g., for a music streaming app" />
         </div>
-        <button id="mix-submit" class="btn-primary btn-mix">Mix & Generate</button>
+        <button id="mix-submit" class="btn-primary btn-mix">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+          Mix &amp; Generate
+        </button>
         <div id="mix-result" class="result-area hidden"></div>
+      </div>
+    </section>
+
+    <!-- Stats Tab -->
+    <section class="tab-content" id="tab-stats">
+      <div class="tab-hero">
+        <h2>Database Stats</h2>
+        <p>Overview of the DESIGNNN trend database.</p>
+      </div>
+      <div class="stats-container" id="stats-container">
+        <div class="stats-loading">Loading stats...</div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>DESIGNNN v0.1.0 — Made with energy by <a href="https://github.com/abe430" target="_blank">concepter</a></p>
+    <div class="footer-content">
+      <p>DESIGNNN v0.3.0 — Trend-driven design prompt engine</p>
+      <p class="footer-sub">Made by <a href="https://github.com/abe430" target="_blank">concepter</a> &middot; <a href="https://www.npmjs.com/package/designnn" target="_blank">npm</a> &middot; <a href="https://github.com/abe430/designnn" target="_blank">GitHub</a></p>
+    </div>
   </footer>
 
   <script src="/app.js"></script>

@@ -18,13 +18,18 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function createServer(port: number = 3333) {
+export async function createServer(port: number = 3333) {
   const app = express();
 
   app.use(express.json());
 
   // Serve static files from the public directory
-  app.use(express.static(path.join(__dirname, "../../public")));
+  // Support both dev (src/web/) and bundled (dist/) paths
+  const publicDir = path.join(__dirname, "../../public");
+  const publicDirAlt = path.join(__dirname, "../public");
+  const fs_check = await import("fs");
+  const resolvedPublic = fs_check.existsSync(publicDir) ? publicDir : publicDirAlt;
+  app.use(express.static(resolvedPublic));
 
   // === API Routes ===
 
@@ -137,14 +142,14 @@ export function createServer(port: number = 3333) {
 
   // Fallback: serve index.html for SPA
   app.get("/{*splat}", (_req, res) => {
-    res.sendFile(path.join(__dirname, "../../public/index.html"));
+    res.sendFile(path.join(resolvedPublic, "index.html"));
   });
 
   return app;
 }
 
-export function startWebServer(port: number = 3333): void {
-  const app = createServer(port);
+export async function startWebServer(port: number = 3333): Promise<void> {
+  const app = await createServer(port);
   app.listen(port, () => {
     const stats = getTrendStats();
     console.log("");
