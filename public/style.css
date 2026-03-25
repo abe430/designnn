@@ -1,5 +1,5 @@
 /* ============================================
-   DESIGNNN Web UI v0.3.0
+   DESIGNNN Web UI v0.4.0
    Brand: Black base × Neon Yellow (#CCFF00)
    Font: Inter (body), JetBrains Mono (code)
    ============================================ */
@@ -151,6 +151,34 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all var(--transition);
+}
+
+.lang-toggle:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: var(--shadow-accent);
+}
+
+.lang-label {
+  pointer-events: none;
 }
 
 .header-link {

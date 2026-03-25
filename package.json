@@ -1,6 +1,6 @@
 {
   "name": "designnn",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Trend-driven design prompt engine for Figma AI. Generate high-quality UI/UX prompts powered by real-time design trend analysis.",
   "type": "module",
   "bin": {

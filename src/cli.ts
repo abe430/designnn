@@ -5,16 +5,29 @@ import { printBanner } from "./utils/display.js";
 import { chatCommand } from "./commands/chat.js";
 import { exploreCommand } from "./commands/explore.js";
 import { mixCommand } from "./commands/mix.js";
+import { setLang, detectLang, type Lang } from "./utils/i18n.js";
 
 const program = new Command();
+
+// Detect language from environment or --lang flag
+function initLang(options: any): void {
+  if (options?.lang) {
+    setLang(options.lang as Lang);
+  } else {
+    setLang(detectLang());
+  }
+}
 
 program
   .name("designnn")
   .description(
-    "Trend-driven design prompt engine for Figma AI.\nGenerate high-quality UI/UX prompts powered by real-time design trend analysis."
+    "Trend-driven design prompt engine for Figma AI.\nGenerate high-quality UI/UX prompts powered by real-time design trend analysis.\n\nFigma AI のためのトレンド駆動デザインプロンプトエンジン。"
   )
-  .version("0.2.0")
+  .version("0.4.0")
+  .option("--lang <language>", "Display language: en or ja (auto-detected from system)")
   .hook("preAction", (thisCommand) => {
+    const opts = thisCommand.opts();
+    initLang(opts);
     // Don't print banner for agent command (stdout is used for MCP protocol)
     if (thisCommand.name() !== "agent") {
       printBanner();
@@ -96,6 +109,7 @@ program.parse(process.argv);
 
 // Show help if no command provided
 if (!process.argv.slice(2).length) {
+  setLang(detectLang());
   printBanner();
   program.outputHelp();
 }

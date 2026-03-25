@@ -1,16 +1,17 @@
 import chalk from "chalk";
 import type { Trend } from "../data/trends.js";
+import { t } from "./i18n.js";
 
 export const BRAND = {
   name: chalk.bold.hex("#CCFF00")("DESIGNNN"),
-  tagline: chalk.gray("Trend-driven design prompt engine for Figma AI"),
-  version: chalk.gray("v0.1.0"),
+  tagline: () => chalk.gray(t("tagline")),
+  version: chalk.gray("v0.4.0"),
 };
 
 export function printBanner(): void {
   console.log("");
   console.log(`  ${BRAND.name} ${BRAND.version}`);
-  console.log(`  ${BRAND.tagline}`);
+  console.log(`  ${BRAND.tagline()}`);
   console.log("");
 }
 
@@ -22,7 +23,7 @@ export function printTrend(trend: Trend, index?: number): void {
   );
   console.log(`     ${chalk.dim(trend.description)}`);
   console.log(
-    `     ${chalk.gray("Keywords:")} ${trend.keywords.map((k) => chalk.cyan(k)).join(", ")}`
+    `     ${chalk.gray(t("keywords") + ":")} ${trend.keywords.map((k) => chalk.cyan(k)).join(", ")}`
   );
   console.log("");
 }
@@ -30,7 +31,7 @@ export function printTrend(trend: Trend, index?: number): void {
 export function printPrompt(prompt: string, label?: string): void {
   console.log("");
   console.log(
-    chalk.hex("#CCFF00").bold(`  ─── ${label || "Generated Prompt"} ───`)
+    chalk.hex("#CCFF00").bold(`  ─── ${label || t("generatedPrompt")} ───`)
   );
   console.log("");
   console.log(chalk.white(`  ${prompt.split("\n").join("\n  ")}`));
@@ -38,7 +39,7 @@ export function printPrompt(prompt: string, label?: string): void {
   console.log(chalk.hex("#CCFF00")("  ─────────────────────────────────"));
   console.log("");
   console.log(
-    chalk.dim("  📋 Copy the prompt above and paste it into Figma AI (Ctrl+I)")
+    chalk.dim(`  📋 ${t("copyHint")}`)
   );
   console.log("");
 }

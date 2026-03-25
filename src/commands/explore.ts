@@ -9,6 +9,7 @@ import {
 } from "../data/trends.js";
 import { generateTrendPrompt } from "../core/engine.js";
 import { printTrend, printPrompt, printSection, printError } from "../utils/display.js";
+import { t, getCategoryName } from "../utils/i18n.js";
 
 interface ExploreOptions {
   category?: string;
@@ -19,54 +20,52 @@ interface ExploreOptions {
 
 export async function exploreCommand(options: ExploreOptions): Promise<void> {
   let results: Trend[] = [];
-  let title = "Design Trends";
+  let title = t("exploreDesignTrends");
 
   if (options.component) {
     results = searchTrends(options.component);
-    title = `Trends matching: "${options.component}"`;
+    title = `${t("exploreMatching")}: "${options.component}"`;
   } else if (options.category) {
     const validCategories = ["style", "component", "pattern", "layout", "interaction"];
     if (!validCategories.includes(options.category)) {
       printError(
-        `Invalid category. Choose from: ${validCategories.join(", ")}`
+        `${t("exploreInvalidCategory")}: ${validCategories.join(", ")}`
       );
       process.exit(1);
     }
     results = getTrendsByCategory(options.category as Trend["category"]);
-    title = `${options.category.charAt(0).toUpperCase() + options.category.slice(1)} Trends`;
+    title = `${getCategoryName(options.category)} ${t("exploreTrends")}`;
   } else if (options.top) {
     const limit = parseInt(options.top) || 10;
     results = getTopTrends(limit);
-    title = `Top ${limit} Design Trends`;
+    title = `${t("exploreTop")} ${limit} ${t("exploreDesignTrends")}`;
   } else {
     // Default: show all trends grouped by category
-    printSection("All Design Trends");
-    console.log(chalk.dim(`  ${TRENDS.length} trends in database\n`));
+    printSection(t("exploreAllTrends"));
+    console.log(chalk.dim(`  ${TRENDS.length} ${t("exploreTrendsInDb")}\n`));
 
     const categories = ["style", "component", "pattern", "layout", "interaction"] as const;
     for (const cat of categories) {
       const catTrends = getTrendsByCategory(cat);
       console.log(
-        chalk.bold(`  ${cat.toUpperCase()} (${catTrends.length})`)
+        chalk.bold(`  ${getCategoryName(cat).toUpperCase()} (${catTrends.length})`)
       );
       catTrends.forEach((t, i) => printTrend(t, i));
     }
 
-    console.log(chalk.dim("  Tip: Use --category, --component, or --top to filter"));
-    console.log(
-      chalk.dim('  Tip: Use --generate <trend-id> to create a prompt from a trend\n')
-    );
+    console.log(chalk.dim(`  ${t("exploreTipFilter")}`));
+    console.log(chalk.dim(`  ${t("exploreTipGenerate")}\n`));
     return;
   }
 
   if (results.length === 0) {
-    printError("No trends found matching your query.");
+    printError(t("exploreNoResults"));
     console.log(chalk.dim("  Try: designnn explore --top 10"));
     return;
   }
 
   printSection(title);
-  console.log(chalk.dim(`  ${results.length} results\n`));
+  console.log(chalk.dim(`  ${results.length} ${t("exploreResults")}\n`));
   results.forEach((t, i) => printTrend(t, i));
 
   // If --generate flag is set, generate a prompt from the specified trend
@@ -76,15 +75,15 @@ export async function exploreCommand(options: ExploreOptions): Promise<void> {
       TRENDS.find((t) => t.id === options.generate);
 
     if (!trend) {
-      printError(`Trend "${options.generate}" not found.`);
+      printError(`${t("exploreTrendNotFound")}: "${options.generate}"`);
       console.log(
-        chalk.dim("  Available IDs: " + results.map((t) => t.id).join(", "))
+        chalk.dim(`  ${t("exploreAvailableIds")}: ` + results.map((t) => t.id).join(", "))
       );
       return;
     }
 
     const spinner = ora({
-      text: `Generating Figma AI prompt for "${trend.name}"...`,
+      text: `${t("exploreGenerating")} "${trend.name}"...`,
       color: "yellow",
     }).start();
 
@@ -94,7 +93,7 @@ export async function exploreCommand(options: ExploreOptions): Promise<void> {
       printPrompt(prompt, `Trend: ${trend.name}`);
     } catch (error: any) {
       spinner.stop();
-      printError(`Generation failed: ${error?.message || "Unknown error"}`);
+      printError(`${t("chatFailed")}: ${error?.message || "Unknown error"}`);
     }
   }
 }
